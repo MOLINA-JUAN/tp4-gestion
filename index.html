@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encriptación de Número</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="formulario">
+  <h1>Encriptado y desencriptado de Números</h1>
+  
+  <input type="number" id="numero" placeholder="Ingrese un numero de 4 digitos" required>
+  <button id="encriptar">encriptar</i></button>
+  <button id="desencriptar">Desencriptar</button>
+  <div id="resultado">
+    
+  </div>
+</div>
+  <script>
+        window.addEventListener("DOMContentLoaded", function() {
+    let encriptarBtn = document.getElementById("encriptar");
+    let desencriptarBtn = document.getElementById("desencriptar");
+    let resultado = document.getElementById("resultado");
+
+    encriptarBtn.addEventListener("click", function() {
+      let numero = document.getElementById("numero").value;
+      if (numero >= 9999) {
+        alert("No se pueden agregar números mayores a 4 cifras");
+      } else if(numero<=1000){
+        alert("No se pueden agregar números menores a 4 cifras");
+      } else{
+        let numEncriptado = encriptar(numero);
+        resultado.textContent = "El número encriptado es: " + numEncriptado;
+      }
+    });
+
+    desencriptarBtn.addEventListener("click", function() {
+      let numero = document.getElementById("numero").value;
+      if (numero >= 9999) {
+        alert("No se pueden agregar números mayores a 4 cifras");
+      } else {
+        let numDesencriptado = desencriptar(numero);
+        resultado.textContent = "El número desencriptado es: " + numDesencriptado;
+      }
+    });
+
+    function encriptar(numero) {
+      let digito1 = Math.floor(numero / 1000) % 10;
+      let digito2 = Math.floor(numero / 100) % 10;
+      let digito3 = Math.floor(numero / 10) % 10;
+      let digito4 = numero % 10;
+      digito1 = (digito1 + 7) % 10;
+      digito2 = (digito2 + 7) % 10;
+      digito3 = (digito3 + 7) % 10;
+      digito4 = (digito4 + 7) % 10;
+      let numeroEncriptado = digito3 * 1000 + digito4 * 100 + digito1 * 10 + digito2;
+      return numeroEncriptado;
+    }
+
+    function desencriptar(numero) {
+      let digito1 = Math.floor(numero / 1000) % 10;
+      let digito2 = Math.floor(numero / 100) % 10;
+      let digito3 = Math.floor(numero / 10) % 10;
+      let digito4 = numero % 10;
+      digito1 = (digito1 + 3) % 10;
+      digito2 = (digito2 + 3) % 10;
+      digito3 = (digito3 + 3) % 10;
+      digito4 = (digito4 + 3) % 10;
+      let numeroDesencriptado = digito3 * 1000 + digito4 * 100 + digito1 * 10 + digito2;
+      return numeroDesencriptado;
+    }});
+
+  </script>
+
+</body>
+</html>
